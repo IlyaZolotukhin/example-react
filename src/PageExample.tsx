@@ -31,10 +31,10 @@ const PageExample: React.FC = () => {
             <Button onClick={() => fetchProducts()}>Нажми меня</Button>
             <div>
                 {products.map(product => (
-                    <Product key={product.id}>
+                    <ContainerIMG key={product.id}>
                         <IMG src={product.image} alt={product.title}/>
                         <h3>{product.title}</h3>
-                    </Product>
+                    </ContainerIMG>
                 ))}
             </div>
         </Container>
@@ -63,7 +63,7 @@ const IMG = styled.img`
 ;
 
 // Стили для продуктов
-const Product = styled.div`
+const ContainerIMG = styled.div`
     display: flex;
     flex-direction: row;
     margin-top: 100px;
