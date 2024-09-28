@@ -1,39 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import axios from "axios";
-
-interface Product {
-    id: number;
-    title: string;
-    price: string;
-    category: string;
-    description: string;
-    image: string;
-}
+import {Product} from "./types";
+import {useLazyGetProductsQuery} from "./api/productApi";
 
 const PageExample: React.FC = () => {
-    const [products, setProducts] = useState<Product[]>([]);
-
-
-    const fetchProducts = async () => {
-        try {
-            const response = await axios.get<Product[]>('https://fakestoreapi.com/products');
-            setProducts(response.data);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
-
+    const [trigger, { data: products = [], error, isLoading }] = useLazyGetProductsQuery();
 
     return (
         <Container>
             <Title>Добро пожаловать на мою страницу!</Title>
-            <Button onClick={() => fetchProducts()}>Нажми меня</Button>
+            <Button onClick={() => trigger()}>Нажми меня</Button>
             <div>
-                {products.map(product => (
+                {isLoading && <p>Loading...</p>}
+                {error && <p style={{color: "red"}}>Error fetching products.</p>}
+                {products.map((product: Product) => (
                     <ContainerIMG key={product.id}>
-                        <IMG src={product.image} alt={product.title}/>
+                        <IMG src={product.image} alt={product.title} />
                         <h3>{product.title}</h3>
+                        <h4 style={{ marginLeft: 100 }}>{product.price}$</h4>
                     </ContainerIMG>
                 ))}
             </div>
