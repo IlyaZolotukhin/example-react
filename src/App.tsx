@@ -1,10 +1,10 @@
 import React from 'react';
-import PageExample from "./PageExample";
+import MyPage from "./MyPage";
 
 function App() {
   return (
     <div>
-        <PageExample />
+        <MyPage />
     </div>
   );
 }

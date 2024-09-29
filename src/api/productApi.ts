@@ -4,12 +4,21 @@ import {Product} from "../types";
 
 export const productsApi = createApi({
     reducerPath: 'productsApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://fakestoreapi.com/' }),
+    baseQuery: fetchBaseQuery({baseUrl: 'https://fakestoreapi.com/'}),
     endpoints: (builder) => ({
         getProducts: builder.query<Product[], void>({
             query: () => 'products',
         }),
+        deleteProduct: builder.mutation<void, number>({
+            query: (id) => ({
+                url: `products/${id}`,
+                method: 'DELETE',
+            }),
+        }),
     }),
 });
 
-export const { useGetProductsQuery, useLazyGetProductsQuery } = productsApi;
+export const {
+    useGetProductsQuery,
+    useLazyGetProductsQuery,
+    useDeleteProductMutation } = productsApi;
