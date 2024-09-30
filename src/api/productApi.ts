@@ -2,8 +2,8 @@ import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import {Product} from "../types";
 
 
-export const productsApi = createApi({
-    reducerPath: 'productsApi',
+export const productsSlice = createApi({
+    reducerPath: 'productsSlice',
     baseQuery: fetchBaseQuery({baseUrl: 'https://fakestoreapi.com/'}),
     endpoints: (builder) => ({
         getProducts: builder.query<Product[], void>({
@@ -21,4 +21,4 @@ export const productsApi = createApi({
 export const {
     useGetProductsQuery,
     useLazyGetProductsQuery,
-    useDeleteProductMutation } = productsApi;
+    useDeleteProductMutation } = productsSlice;

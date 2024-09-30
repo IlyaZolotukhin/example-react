@@ -51,7 +51,7 @@ const IMG = styled.img`
 ;
 
 // Стили для ошибки
-const ERROR = styled.p`
+export const ERROR = styled.p`
     color: red`
 ;
 

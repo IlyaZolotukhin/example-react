@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useLazyGetProductsQuery} from "./api/productApi";
-import LoadingPage from "./LoadingPage";
 
-const MyPage: React.FC = () => {
-    const [trigger, {data: products = [], error, isLoading}] = useLazyGetProductsQuery();
+interface MyPageProps {
+    trigger(): void
+}
+
+const MyPage: React.FC<MyPageProps> = ({trigger}) => {
 
     return (
         <Container>
             <Title>Добро пожаловать на мою страницу!</Title>
             <Button onClick={() => trigger()}>Нажми меня</Button>
-            <LoadingPage initialProducts={products} error={error} isLoading={isLoading} />
         </Container>
     );
 };
@@ -20,8 +20,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;`
+    justify-content: center;`
 ;
 
 // Стили для заголовка

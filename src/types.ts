@@ -6,3 +6,13 @@ export interface Product {
     description: string;
     image: string;
 }
+
+
+export interface LoginResponse {
+    token: string;
+}
+
+export interface LoginRequest {
+    username: string;
+    password: string;
+}
