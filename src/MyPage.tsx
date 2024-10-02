@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import {useNavigate} from "react-router-dom";
 
 interface MyPageProps {
     trigger(): void
 }
 
 const MyPage: React.FC<MyPageProps> = ({trigger}) => {
+    const navigate = useNavigate();
+
+    const Trigger = () => {
+        trigger()
+        navigate('/loading')
+    }
 
     return (
         <Container>
             <Title>Добро пожаловать на мою страницу!</Title>
-            <Button onClick={() => trigger()}>Нажми меня</Button>
+            <Button onClick={Trigger}>Нажми меня</Button>
         </Container>
     );
 };

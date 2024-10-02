@@ -3,6 +3,7 @@ import {Product} from "./types";
 import styled from "styled-components";
 import {Button} from "./MyPage";
 import {useDeleteProductMutation} from "./api/productApi";
+import {useNavigate} from "react-router-dom";
 
 interface LoadingPageProps {
     initialProducts: Product[];
@@ -11,12 +12,19 @@ interface LoadingPageProps {
 }
 
 const LoadingPage: React.FC<LoadingPageProps> = ({ initialProducts, error, isLoading }) => {
+    const navigate = useNavigate();
     const [products, setProducts] = useState<Product[]>(initialProducts);
     const [deleteProduct] = useDeleteProductMutation();
 
     useEffect(() => {
         setProducts(initialProducts);
     }, [initialProducts]);
+
+    useEffect(() => {
+        if (products.length === 0 || error) {
+            navigate('/my-page'); // Redirect to home page
+        }
+    }, [products, error, navigate]);
 
     const handleDelete = async (id: number) => {
         try {
@@ -61,7 +69,7 @@ const ContainerIMG = styled.div`
     flex-direction: row;
     gap: 50px;
     align-items: center;
-    margin-top: 100px;
+    margin: 100px;
     background-color: #f0f0f0;`
 ;
 
